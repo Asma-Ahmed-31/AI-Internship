@@ -1,0 +1,24 @@
+setwd("C:/Users/tahaJ/Documents/AI_Omics_Internship_2025/AI Intern")
+getwd()
+
+dir.create("raw_data")
+dir.create("clean_data")
+dir.create("scripts")
+dir.create("results")
+dir.create("plots")
+
+data <- read.csv("raw_data/patient_info.csv")
+
+str(data)
+head(data)
+
+data$gender <- as.factor(data$gender)
+data$diagnosis <- as.factor(data$diagnosis)
+data$smoking_binary <- ifelse(data$smoker == "Yes", 1, 0)
+data$smoking_binary <- as.factor(data$smoking_binary)
+
+str(data)
+
+write.csv(data, file = "clean_data/patient_info_clean.csv", row.names = FALSE)
+
+save.image(file = "AI_Biotech_Workspace.RData")
