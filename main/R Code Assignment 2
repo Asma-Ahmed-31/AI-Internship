@@ -1,0 +1,53 @@
+# 📂 Base directory
+base_dir <- "C:/Users/PC/OneDrive/Desktop/Assignment 2"
+
+# 📂 Define paths
+raw_dir <- file.path(base_dir, "Raw Data")    # Folder containing raw CSV files
+results_dir <- file.path(base_dir, "Results") # Folder to save processed files
+
+# ✅ Create Results folder if it doesn't exist
+if (!dir.exists(results_dir)) {
+  dir.create(results_dir)
+  cat("Created Results folder at:", results_dir, "\n")
+} else {
+  cat("Results folder already exists at:", results_dir, "\n")
+}
+
+# 🔍 List all CSV files in Raw Data folder
+deg_files <- list.files(raw_dir, pattern = "\\.csv$", full.names = TRUE)
+cat("Found the following CSV files in Raw Data:\n")
+print(deg_files)
+
+# 🔄 Define a DEG processing function
+process_DEG <- function(file_path) {
+  name <- tools::file_path_sans_ext(basename(file_path))  # Get file name without extension
+  df <- read.csv(file_path, header = TRUE)
+  
+  # Remove NAs
+  df <- na.omit(df)
+  
+  # Filter log2FoldChange > 1
+  if ("log2FoldChange" %in% colnames(df)) {
+    df <- subset(df, abs(log2FoldChange) > 1)
+  } else {
+    cat("Warning: 'log2FoldChange' column not found in", name, "\n")
+  }
+  
+  # Save processed file
+  out_file <- file.path(results_dir, paste0(name, "_processed.csv"))
+  write.csv(df, out_file, row.names = FALSE)
+  cat("Processed file saved as:", out_file, "\n")
+  
+  return(df)
+}
+
+# ⚡ Process all DEG files automatically
+processed_data <- lapply(deg_files, process_DEG)
+
+cat("✅ All files processed successfully!\n")
+
+# 💾 Save R workspace
+workspace_file <- file.path(base_dir, "Assignment2_Workspace.RData")
+save.image(file = workspace_file)
+cat("✅ Workspace saved successfully at:", workspace_file, "\n")
+save.image(file = "C:/Users/PC/OneDrive/Desktop/Assignment 2/Assignment2_Workspace.RData")
