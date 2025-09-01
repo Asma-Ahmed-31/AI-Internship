@@ -1,0 +1,18 @@
+Summary of DEGs_data_1:
+   Gene_Id               padj            logFC         
+ Length:22283       Min.   :0.0609   Min.   :-3.33916  
+ Class :character   1st Qu.:0.5895   1st Qu.:-0.34787  
+ Mode  :character   Median :0.7516   Median :-0.07095  
+                    Mean   :0.7337   Mean   :-0.03139  
+                    3rd Qu.:0.8891   3rd Qu.: 0.24738  
+                    Max.   :1.0000   Max.   : 4.29764  
+
+
+Summary of DEGs_data_2:
+   Gene_Id               padj              logFC        
+ Length:54675       Min.   :0.000474   Min.   :-9.1780  
+ Class :character   1st Qu.:0.221930   1st Qu.:-0.5022  
+ Mode  :character   Median :0.502674   Median :-0.1290  
+                    Mean   :0.502776   Mean   :-0.1638  
+                    3rd Qu.:0.783518   3rd Qu.: 0.2044  
+                    Max.   :0.999947   Max.   : 5.9818  
